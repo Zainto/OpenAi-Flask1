@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wasii's OpenAI Chatbot</title>
+    <style>
+  
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: darkgray;
+        }
+        .chat-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .message {
+            margin: 5px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            background-color: grey;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        button[type="submit"] {
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: lightgray;
+            border: none;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Wasii's OpenAI Chatbot</h1>
+    <div class="chat-container">
+        {% for message in conversation_history %}
+            <div class="message">
+                <p><strong>{{ message.role }}:</strong> 
+                    
+                    {{ message.content }}{% if message.role=="Assistant" %} &#129302 {% endif %}
+                    {% if message.role=="User" %} &#9786; {% endif %}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+    <form method="POST" action="/chat">
+        <label for="user_input">User:</label>
+        <input type="text" id="user_input" name="user_input" required>
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>
+
+
